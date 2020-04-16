@@ -46,8 +46,13 @@ function posCheck(&$count, $check, $input, $row, $x, $i, &$y, &$q) {
             }
             posCheck($count, $check, $input, $row, $x, $i, $y, $q);
         }
-        if ($row[$x][$y] !== $row[$x][$y+1] 
-        || $row[$x][$y] !== $row[$x+1][$y] 
+        if ($row[$q][$y] === $row[$q][$y+1] 
+        && $row[$q][$y] === $row[$q+1][$y]
+        && $row[$q][$y] === $row[$q+1][$y+1]) {
+
+        }
+        if ($row[$x][$y] !== $row[$x][$y+1]
+        || $row[$x][$y] !== $row[$x+1][$y]
         || $row[$x][$y] !== $row[$x+1][$y+1]) {
             if($count[$x][$check[$i]] > 1 && $y !== false) {
                 $stop = ($count[$x][$check[$i]] - 1) + $x;
