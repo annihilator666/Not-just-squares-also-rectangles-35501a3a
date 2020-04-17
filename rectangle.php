@@ -14,7 +14,7 @@ function construct($input, $check)
     for ($x = 0; $x < count($input); $x++) {
         for ($i = 0; $i < count($check); $i++) {
             $y = stripos($input[$x], $check[$i]);
-            if ($y !== FALSE && $x !== 11) {
+            if ($y !== false && $x !== 11) {
                 $horizontal[$x][$check[$i]] = 1;
                 $vertical[$x][$check[$i]] = 1;
                 $q = $x;
@@ -25,16 +25,19 @@ function construct($input, $check)
     }
 }
 
-function posCheck(&$horizontal, &$vertical, $check, $input, $row, $x, $i, &$y, &$q, &$p) {
-    if ($y !== FALSE && $x !== 10 && $y !== 10) {
-        if ($row[$x][$y] !== $row[$x][$y + 1] 
-        && $row[$x][$y] !== $row[$x + 1][$y]
-        && $row[$x][$y] !== $row[$x + 1][$y + 1]
-        && $horizontal[$x][$check[$i]] === 1) {
+function posCheck(&$horizontal, &$vertical, $check, $input, $row, $x, $i, &$y, &$q, &$p)
+{
+    if ($y !== false && $x !== 10 && $y !== 10) {
+        if (
+            $row[$x][$y] !== $row[$x][$y + 1] &&
+            $row[$x][$y] !== $row[$x + 1][$y] &&
+            $row[$x][$y] !== $row[$x + 1][$y + 1] && 
+            $horizontal[$x][$check[$i]] === 1
+        ) {
             $y = stripos($input[$x], $check[$i], $y + 1);
             $horizontal[$x][$check[$i]] = 0;
             $vertical[$x][$check[$i]] = 0;
-            if($y === TRUE && $row[$x + 1][$y + 1] === $check[$i]) {
+            if($y === true && $row[$x + 1][$y + 1] === $check[$i]) {
                 $horizontal[$x][$check[$i]] = 1;
                 $vertical[$x][$check[$i]] = 1;
                 $q = $x;
@@ -42,9 +45,11 @@ function posCheck(&$horizontal, &$vertical, $check, $input, $row, $x, $i, &$y, &
                 posCheck($horizontal, $vertical, $check, $input, $row, $x, $i, $y, $q);
             }
         }
-        if ($row[$x][$y] === $row[$x][$y + 1] 
-        && $row[$x][$y] === $row[$x + 1][$y]
-        && $row[$x][$y] === $row[$x + 1][$y + 1]) {
+        if (
+            $row[$x][$y] === $row[$x][$y + 1] &&
+            $row[$x][$y] === $row[$x + 1][$y] &&
+            $row[$x][$y] === $row[$x + 1][$y + 1]
+        ) {
             if($vertical[$x][$check[$i]] === 1) {
                 $vertical[$x][$check[$i]]++;
                 $q++;
@@ -58,7 +63,6 @@ function posCheck(&$horizontal, &$vertical, $check, $input, $row, $x, $i, &$y, &
             if ($row[$x][$p] === $row[$x][$p + 1] && $row[$x][$p] === $row[$q][$p + 1]) {
                 $horizontal[$x][$check[$i]]++;
                 $p++;
-                //echo $check[$i] . " / " . $x . ", $y - " . $vertical[$x][$check[$i]] . "x" . $horizontal[$x][$check[$i]]  . PHP_EOL;
                 posCheck($horizontal, $vertical, $check, $input, $row, $x, $i, $y, $q, $p);
             }
         }
@@ -66,7 +70,6 @@ function posCheck(&$horizontal, &$vertical, $check, $input, $row, $x, $i, &$y, &
             if ($row[$q][$y] === $row[$q + 1][$y] && $row[$q][$y] === $row[$q + 1][$p]) {
                 $vertical[$x][$check[$i]]++;
                 $q++;
-                //echo $check[$i] . " / " . $x . ", $y - " . $vertical[$x][$check[$i]] . "x" . $horizontal[$x][$check[$i]]  . PHP_EOL;
                 posCheck($horizontal, $vertical, $check, $input, $row, $x, $i, $y, $q, $p);
             }
         }
