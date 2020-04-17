@@ -37,7 +37,7 @@ function posCheck(&$horizontal, &$vertical, $check, $input, $row, $x, $i, &$y, &
             $y = stripos($input[$x], $check[$i], $y + 1);
             $horizontal[$x][$check[$i]] = 0;
             $vertical[$x][$check[$i]] = 0;
-            if($y === true && $row[$x + 1][$y + 1] === $check[$i]) {
+            if ($y === true && $row[$x + 1][$y + 1] === $check[$i]) {
                 $horizontal[$x][$check[$i]] = 1;
                 $vertical[$x][$check[$i]] = 1;
                 $q = $x;
@@ -50,11 +50,11 @@ function posCheck(&$horizontal, &$vertical, $check, $input, $row, $x, $i, &$y, &
             $row[$x][$y] === $row[$x + 1][$y] &&
             $row[$x][$y] === $row[$x + 1][$y + 1]
         ) {
-            if($vertical[$x][$check[$i]] === 1) {
+            if ($vertical[$x][$check[$i]] === 1) {
                 $vertical[$x][$check[$i]]++;
                 $q++;
             }
-            if($horizontal[$x][$check[$i]] === 1) {
+            if ($horizontal[$x][$check[$i]] === 1) {
                 $horizontal[$x][$check[$i]]++;
                 $p++;
             }
@@ -85,7 +85,7 @@ function posCheck(&$horizontal, &$vertical, $check, $input, $row, $x, $i, &$y, &
                     $q = $x;
                     $p = $y;
                 }
-                if($x !== 0 && $row[$x-1][$y] !== $row[$x][$y]) {
+                if ($x !== 0 && $row[$x - 1][$y] !== $row[$x][$y]) {
                     echo $check[$i] . "($x,$y) - " . $vertical[$x][$check[$i]] . "x" . $horizontal[$x][$check[$i]]  . PHP_EOL;
                     $horizontal[$x][$check[$i]] = 0;
                     $vertical[$x][$check[$i]] = 0;
